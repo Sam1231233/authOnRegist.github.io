@@ -450,6 +450,99 @@
         
         // Создаем частицы при загрузке
         createParticles();
+
+            // Добавьте эти функции в конец скрипта
+    
+    // Глобальные ссылки на элементы
+    let loginBtn, registerBtn;
+    
+    // Инициализация при загрузке
+    window.addEventListener('DOMContentLoaded', () => {
+        loginBtn = document.getElementById('loginBtn');
+        registerBtn = document.getElementById('registerBtn');
+        
+        // Обработчики для кнопок
+        if (loginBtn) loginBtn.addEventListener('click', handleLogin);
+        if (registerBtn) registerBtn.addEventListener('click', handleRegister);
+        
+        // Обработчики для Enter
+        const loginPass = document.getElementById('loginPassword');
+        const registerConfirm = document.getElementById('registerConfirm');
+        
+        if (loginPass) loginPass.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleLogin();
+        });
+        
+        if (registerConfirm) registerConfirm.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleRegister();
+        });
+    });
+    
+    // Обработка входа
+    function handleLogin() {
+        const username = document.getElementById('loginUsername').value;
+        const password = document.getElementById('loginPassword').value;
+        
+        if (!username || !password) {
+            showMessage('Заполните все поля', 'error');
+            return;
+        }
+        
+        // Показать загрузку
+        if (loginBtn) {
+            loginBtn.querySelector('.btn-text').innerHTML = '<div class="loading"></div> Вход...';
+            loginBtn.disabled = true;
+        }
+        
+        // Отправить на сервер
+        alt.emit('auth:login', username, password);
+    }
+    
+    // Обработка регистрации
+    function handleRegister() {
+        const username = document.getElementById('registerUsername').value;
+        const email = document.getElementById('registerEmail').value;
+        const password = document.getElementById('registerPassword').value;
+        const confirm = document.getElementById('registerConfirm').value;
+        
+        // Валидация
+        if (!username || !email || !password || !confirm) {
+            showMessage('Заполните все поля', 'error');
+            return;
+        }
+        
+        if (password !== confirm) {
+            showMessage('Пароли не совпадают', 'error');
+            return;
+        }
+        
+        if (password.length < 6) {
+            showMessage('Пароль слишком короткий (минимум 6 символов)', 'error');
+            return;
+        }
+        
+        // Показать загрузку
+        if (registerBtn) {
+            registerBtn.querySelector('.btn-text').innerHTML = '<div class="loading"></div> Регистрация...';
+            registerBtn.disabled = true;
+        }
+        
+        // Отправить на сервер
+        alt.emit('auth:register', username, password, email);
+    }
+    
+    // Сброс кнопок
+    alt.on('resetButtons', () => {
+        if (loginBtn) {
+            loginBtn.querySelector('.btn-text').innerHTML = 'Войти';
+            loginBtn.disabled = false;
+        }
+        
+        if (registerBtn) {
+            registerBtn.querySelector('.btn-text').innerHTML = 'Создать аккаунт';
+            registerBtn.disabled = false;
+        }
+    });
     </script>
 </body>
 </html>
