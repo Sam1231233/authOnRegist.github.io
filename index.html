@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация</title>
+    <title>РђРІС‚РѕСЂРёР·Р°С†РёСЏ</title>
     <style>
         * {
             margin: 0;
@@ -247,53 +247,53 @@
     
     <div class="auth-container">
         <div class="tabs">
-            <button class="tab-btn active" data-tab="login">Вход</button>
-            <button class="tab-btn" data-tab="register">Регистрация</button>
+            <button class="tab-btn active" data-tab="login">Р’С…РѕРґ</button>
+            <button class="tab-btn" data-tab="register">Р РµРіРёСЃС‚СЂР°С†РёСЏ</button>
         </div>
         
-        <!-- Форма входа -->
+        <!-- Р¤РѕСЂРјР° РІС…РѕРґР° -->
         <div id="loginForm" class="auth-form active">
             <div class="form-group">
-                <label for="loginUsername">Имя пользователя</label>
-                <input type="text" id="loginUsername" placeholder="Введите ваш логин" autocomplete="off">
+                <label for="loginUsername">РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</label>
+                <input type="text" id="loginUsername" placeholder="Р’РІРµРґРёС‚Рµ РІР°С€ Р»РѕРіРёРЅ" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="loginPassword">Пароль</label>
-                <input type="password" id="loginPassword" placeholder="Введите ваш пароль" autocomplete="off">
+                <label for="loginPassword">РџР°СЂРѕР»СЊ</label>
+                <input type="password" id="loginPassword" placeholder="Р’РІРµРґРёС‚Рµ РІР°С€ РїР°СЂРѕР»СЊ" autocomplete="off">
             </div>
             <button class="submit-btn" id="loginBtn">
-                <span class="btn-text">Войти</span>
+                <span class="btn-text">Р’РѕР№С‚Рё</span>
             </button>
             <div class="message" id="loginMessage"></div>
         </div>
         
-        <!-- Форма регистрации -->
+        <!-- Р¤РѕСЂРјР° СЂРµРіРёСЃС‚СЂР°С†РёРё -->
         <div id="registerForm" class="auth-form">
             <div class="form-group">
-                <label for="registerUsername">Имя пользователя</label>
-                <input type="text" id="registerUsername" placeholder="Придумайте логин" autocomplete="off">
+                <label for="registerUsername">РРјСЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ</label>
+                <input type="text" id="registerUsername" placeholder="РџСЂРёРґСѓРјР°Р№С‚Рµ Р»РѕРіРёРЅ" autocomplete="off">
             </div>
             <div class="form-group">
                 <label for="registerEmail">Email</label>
-                <input type="email" id="registerEmail" placeholder="Введите ваш email" autocomplete="off">
+                <input type="email" id="registerEmail" placeholder="Р’РІРµРґРёС‚Рµ РІР°С€ email" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="registerPassword">Пароль</label>
-                <input type="password" id="registerPassword" placeholder="Придумайте пароль" autocomplete="off">
+                <label for="registerPassword">РџР°СЂРѕР»СЊ</label>
+                <input type="password" id="registerPassword" placeholder="РџСЂРёРґСѓРјР°Р№С‚Рµ РїР°СЂРѕР»СЊ" autocomplete="off">
             </div>
             <div class="form-group">
-                <label for="registerConfirm">Подтверждение пароля</label>
-                <input type="password" id="registerConfirm" placeholder="Повторите пароль" autocomplete="off">
+                <label for="registerConfirm">РџРѕРґС‚РІРµСЂР¶РґРµРЅРёРµ РїР°СЂРѕР»СЏ</label>
+                <input type="password" id="registerConfirm" placeholder="РџРѕРІС‚РѕСЂРёС‚Рµ РїР°СЂРѕР»СЊ" autocomplete="off">
             </div>
             <button class="submit-btn" id="registerBtn">
-                <span class="btn-text">Создать аккаунт</span>
+                <span class="btn-text">РЎРѕР·РґР°С‚СЊ Р°РєРєР°СѓРЅС‚</span>
             </button>
             <div class="message" id="registerMessage"></div>
         </div>
     </div>
 
     <script>
-        // Создаем частицы для фона
+        // РЎРѕР·РґР°РµРј С‡Р°СЃС‚РёС†С‹ РґР»СЏ С„РѕРЅР°
         function createParticles() {
             const container = document.getElementById('particles');
             const count = 30;
@@ -302,7 +302,7 @@
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 
-                // Случайные размеры и позиции
+                // РЎР»СѓС‡Р°Р№РЅС‹Рµ СЂР°Р·РјРµСЂС‹ Рё РїРѕР·РёС†РёРё
                 const size = Math.random() * 20 + 5;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
@@ -320,22 +320,22 @@
             }
         }
         
-        // Переключение между вкладками
+        // РџРµСЂРµРєР»СЋС‡РµРЅРёРµ РјРµР¶РґСѓ РІРєР»Р°РґРєР°РјРё
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const tab = btn.dataset.tab;
                 
-                // Обновляем активную кнопку
+                // РћР±РЅРѕРІР»СЏРµРј Р°РєС‚РёРІРЅСѓСЋ РєРЅРѕРїРєСѓ
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 
-                // Показываем активную форму
+                // РџРѕРєР°Р·С‹РІР°РµРј Р°РєС‚РёРІРЅСѓСЋ С„РѕСЂРјСѓ
                 document.querySelectorAll('.auth-form').forEach(form => {
                     form.classList.remove('active');
                 });
                 document.getElementById(`${tab}Form`).classList.add('active');
                 
-                // Сбрасываем сообщения
+                // РЎР±СЂР°СЃС‹РІР°РµРј СЃРѕРѕР±С‰РµРЅРёСЏ
                 document.querySelectorAll('.message').forEach(el => {
                     el.textContent = '';
                     el.classList.remove('show');
@@ -343,11 +343,11 @@
             });
         });
         
-        // Обработчики кнопок
+        // РћР±СЂР°Р±РѕС‚С‡РёРєРё РєРЅРѕРїРѕРє
         document.getElementById('loginBtn').addEventListener('click', login);
         document.getElementById('registerBtn').addEventListener('click', register);
         
-        // Функция входа
+        // Р¤СѓРЅРєС†РёСЏ РІС…РѕРґР°
         function login() {
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
@@ -355,21 +355,21 @@
             const btn = document.getElementById('loginBtn');
             const btnText = btn.querySelector('.btn-text');
             
-            // Валидация
+            // Р’Р°Р»РёРґР°С†РёСЏ
             if (!username || !password) {
-                showMessage(messageEl, 'Заполните все поля', 'error');
+                showMessage(messageEl, 'Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ', 'error');
                 return;
             }
             
-            // Показать индикатор загрузки
-            btnText.innerHTML = '<div class="loading"></div> Вход...';
+            // РџРѕРєР°Р·Р°С‚СЊ РёРЅРґРёРєР°С‚РѕСЂ Р·Р°РіСЂСѓР·РєРё
+            btnText.innerHTML = '<div class="loading"></div> Р’С…РѕРґ...';
             btn.disabled = true;
             
-            // Отправляем на сервер
+            // РћС‚РїСЂР°РІР»СЏРµРј РЅР° СЃРµСЂРІРµСЂ
             alt.emit('auth:login', username, password);
         }
         
-        // Функция регистрации
+        // Р¤СѓРЅРєС†РёСЏ СЂРµРіРёСЃС‚СЂР°С†РёРё
         function register() {
             const username = document.getElementById('registerUsername').value;
             const email = document.getElementById('registerEmail').value;
@@ -379,76 +379,76 @@
             const btn = document.getElementById('registerBtn');
             const btnText = btn.querySelector('.btn-text');
             
-            // Валидация
+            // Р’Р°Р»РёРґР°С†РёСЏ
             if (!username || !email || !password || !confirm) {
-                showMessage(messageEl, 'Заполните все поля', 'error');
+                showMessage(messageEl, 'Р—Р°РїРѕР»РЅРёС‚Рµ РІСЃРµ РїРѕР»СЏ', 'error');
                 return;
             }
             
             if (password !== confirm) {
-                showMessage(messageEl, 'Пароли не совпадают', 'error');
+                showMessage(messageEl, 'РџР°СЂРѕР»Рё РЅРµ СЃРѕРІРїР°РґР°СЋС‚', 'error');
                 return;
             }
             
             if (password.length < 6) {
-                showMessage(messageEl, 'Пароль слишком короткий (мин. 6 символов)', 'error');
+                showMessage(messageEl, 'РџР°СЂРѕР»СЊ СЃР»РёС€РєРѕРј РєРѕСЂРѕС‚РєРёР№ (РјРёРЅ. 6 СЃРёРјРІРѕР»РѕРІ)', 'error');
                 return;
             }
             
-            // Проверка email
+            // РџСЂРѕРІРµСЂРєР° email
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!emailRegex.test(email)) {
-                showMessage(messageEl, 'Некорректный email', 'error');
+                showMessage(messageEl, 'РќРµРєРѕСЂСЂРµРєС‚РЅС‹Р№ email', 'error');
                 return;
             }
             
-            // Показать индикатор загрузки
-            btnText.innerHTML = '<div class="loading"></div> Регистрация...';
+            // РџРѕРєР°Р·Р°С‚СЊ РёРЅРґРёРєР°С‚РѕСЂ Р·Р°РіСЂСѓР·РєРё
+            btnText.innerHTML = '<div class="loading"></div> Р РµРіРёСЃС‚СЂР°С†РёСЏ...';
             btn.disabled = true;
             
-            // Отправляем на сервер
+            // РћС‚РїСЂР°РІР»СЏРµРј РЅР° СЃРµСЂРІРµСЂ
             alt.emit('auth:register', username, password, email);
         }
         
-        // Функция показа сообщений
+        // Р¤СѓРЅРєС†РёСЏ РїРѕРєР°Р·Р° СЃРѕРѕР±С‰РµРЅРёР№
         function showMessage(element, text, type = 'info') {
             element.textContent = text;
             element.style.color = type === 'error' ? '#ff6b6b' : '#4ecca3';
             element.classList.add('show');
             
-            // Автоскрытие сообщений
+            // РђРІС‚РѕСЃРєСЂС‹С‚РёРµ СЃРѕРѕР±С‰РµРЅРёР№
             setTimeout(() => {
                 element.classList.remove('show');
             }, 5000);
         }
         
-        // События от сервера
+        // РЎРѕР±С‹С‚РёСЏ РѕС‚ СЃРµСЂРІРµСЂР°
         alt.on('auth:message', (message, type) => {
             const activeMessage = document.querySelector('.auth-form.active .message');
             if (activeMessage) {
                 showMessage(activeMessage, message, type);
             }
             
-            // Восстанавливаем кнопки
+            // Р’РѕСЃСЃС‚Р°РЅР°РІР»РёРІР°РµРј РєРЅРѕРїРєРё
             document.querySelectorAll('.submit-btn').forEach(btn => {
                 btn.querySelector('.btn-text').innerHTML = 
-                    btn.id === 'loginBtn' ? 'Войти' : 'Создать аккаунт';
+                    btn.id === 'loginBtn' ? 'Р’РѕР№С‚Рё' : 'РЎРѕР·РґР°С‚СЊ Р°РєРєР°СѓРЅС‚';
                 btn.disabled = false;
             });
         });
         
-        // Успешная авторизация
+        // РЈСЃРїРµС€РЅР°СЏ Р°РІС‚РѕСЂРёР·Р°С†РёСЏ
         alt.on('auth:success', () => {
-            // Анимация закрытия
+            // РђРЅРёРјР°С†РёСЏ Р·Р°РєСЂС‹С‚РёСЏ
             const container = document.querySelector('.auth-container');
             container.style.opacity = '0';
             container.style.transform = 'translateY(-20px)';
             container.style.pointerEvents = 'none';
             
-            // Можно добавить дополнительные эффекты
+            // РњРѕР¶РЅРѕ РґРѕР±Р°РІРёС‚СЊ РґРѕРїРѕР»РЅРёС‚РµР»СЊРЅС‹Рµ СЌС„С„РµРєС‚С‹
         });
         
-        // Создаем частицы при загрузке
+        // РЎРѕР·РґР°РµРј С‡Р°СЃС‚РёС†С‹ РїСЂРё Р·Р°РіСЂСѓР·РєРµ
         createParticles();
     </script>
 </body>
