@@ -1,548 +1,174 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Авторизация</title>
+    <title>Gang RP</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: white;
             height: 100vh;
+            margin: 0;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            color: white;
         }
-        
-        .auth-container {
-            background: rgba(25, 25, 45, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            width: 400px;
-            padding: 40px;
-            position: relative;
-            overflow: hidden;
-            z-index: 10;
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            width: 350px;
+            text-align: center;
         }
-        
-        .auth-container::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
-            transform: rotate(45deg);
-            z-index: -1;
+        .logo {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #ff0000;
         }
-        
         .tabs {
             display: flex;
-            margin-bottom: 30px;
-            position: relative;
+            margin-bottom: 20px;
         }
-        
-        .tabs::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: rgba(255,255,255,0.1);
-        }
-        
-        .tab-btn {
+        .tab {
             flex: 1;
-            padding: 15px;
-            background: none;
-            border: none;
-            color: rgba(255,255,255,0.6);
-            font-size: 18px;
-            font-weight: 600;
+            padding: 10px;
+            background: #222;
             cursor: pointer;
-            position: relative;
-            transition: all 0.3s ease;
+            border-bottom: 2px solid #444;
         }
-        
-        .tab-btn.active {
-            color: #4ecca3;
+        .tab.active {
+            background: #b21f1f;
+            border-bottom: 2px solid #ff0000;
         }
-        
-        .tab-btn::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: #4ecca3;
-            transition: all 0.3s ease;
-        }
-        
-        .tab-btn.active::after {
+        input {
             width: 100%;
-        }
-        
-        .auth-form {
-            display: none;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeIn 0.5s forwards;
-        }
-        
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .auth-form.active {
-            display: block;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-            position: relative;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: rgba(255,255,255,0.8);
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 15px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 10px;
-            color: white;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: #4ecca3;
-            background: rgba(78, 204, 163, 0.05);
-            box-shadow: 0 0 10px rgba(78, 204, 163, 0.3);
-        }
-        
-        .form-group input::placeholder {
-            color: rgba(255,255,255,0.4);
-        }
-        
-        .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(to right, #4ecca3, #00b4db);
+            padding: 12px;
+            margin: 10px 0;
             border: none;
-            border-radius: 10px;
+            border-radius: 5px;
+            background: #333;
             color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .submit-btn:active {
-            transform: translateY(0);
-        }
-        
-        .submit-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
+        button {
             width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0.2), transparent);
-            transform: translateX(-100%);
-            transition: transform 0.5s ease;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: #b21f1f;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
         }
-        
-        .submit-btn:hover::after {
-            transform: translateX(100%);
+        button:hover {
+            background: #ff0000;
         }
-        
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s ease-in-out infinite;
-            margin-right: 10px;
-            vertical-align: middle;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
         .message {
-            text-align: center;
-            color: #ff6b6b;
-            font-weight: 500;
             margin-top: 15px;
+            color: #ff5555;
             min-height: 20px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.3s ease;
-        }
-        
-        .message.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
-        .particle {
-            position: absolute;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            100% { transform: translateY(-1000px) translateX(1000px) rotate(720deg); opacity: 0; }
         }
     </style>
 </head>
 <body>
-    <div class="particles" id="particles"></div>
-    
-    <div class="auth-container">
+    <div class="container">
+        <div class="logo">GANG RP</div>
         <div class="tabs">
-            <button class="tab-btn active" data-tab="login">Вход</button>
-            <button class="tab-btn" data-tab="register">Регистрация</button>
+            <div class="tab active" id="login-tab">Вход</div>
+            <div class="tab" id="register-tab">Регистрация</div>
         </div>
         
-        <!-- Форма входа -->
-        <div id="loginForm" class="auth-form active">
-            <div class="form-group">
-                <label for="loginUsername">Имя пользователя</label>
-                <input type="text" id="loginUsername" placeholder="Введите ваш логин" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="loginPassword">Пароль</label>
-                <input type="password" id="loginPassword" placeholder="Введите ваш пароль" autocomplete="off">
-            </div>
-            <button class="submit-btn" id="loginBtn">
-                <span class="btn-text">Войти</span>
-            </button>
-            <div class="message" id="loginMessage"></div>
+        <div id="login-form">
+            <input type="email" id="login-email" placeholder="Email">
+            <input type="password" id="login-password" placeholder="Пароль">
+            <button onclick="login()">Войти</button>
+            <div class="message" id="login-message"></div>
         </div>
         
-        <!-- Форма регистрации -->
-        <div id="registerForm" class="auth-form">
-            <div class="form-group">
-                <label for="registerUsername">Имя пользователя</label>
-                <input type="text" id="registerUsername" placeholder="Придумайте логин" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="registerEmail">Email</label>
-                <input type="email" id="registerEmail" placeholder="Введите ваш email" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="registerPassword">Пароль</label>
-                <input type="password" id="registerPassword" placeholder="Придумайте пароль" autocomplete="off">
-            </div>
-            <div class="form-group">
-                <label for="registerConfirm">Подтверждение пароля</label>
-                <input type="password" id="registerConfirm" placeholder="Повторите пароль" autocomplete="off">
-            </div>
-            <button class="submit-btn" id="registerBtn">
-                <span class="btn-text">Создать аккаунт</span>
-            </button>
-            <div class="message" id="registerMessage"></div>
+        <div id="register-form" style="display:none">
+            <input type="text" id="register-login" placeholder="Логин">
+            <input type="email" id="register-email" placeholder="Email">
+            <input type="password" id="register-password" placeholder="Пароль">
+            <input type="password" id="register-confirm" placeholder="Повторите пароль">
+            <button onclick="register()">Зарегистрироваться</button>
+            <div class="message" id="register-message"></div>
         </div>
     </div>
 
     <script>
-        // Создаем частицы для фона
-        function createParticles() {
-            const container = document.getElementById('particles');
-            const count = 30;
-            
-            for (let i = 0; i < count; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                // Случайные размеры и позиции
-                const size = Math.random() * 20 + 5;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const delay = Math.random() * 15;
-                const duration = 15 + Math.random() * 20;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                
-                container.appendChild(particle);
-            }
-        }
-        
         // Переключение между вкладками
-        document.querySelectorAll('.tab-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const tab = btn.dataset.tab;
-                
-                // Обновляем активную кнопку
-                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                
-                // Показываем активную форму
-                document.querySelectorAll('.auth-form').forEach(form => {
-                    form.classList.remove('active');
-                });
-                document.getElementById(`${tab}Form`).classList.add('active');
-                
-                // Сбрасываем сообщения
-                document.querySelectorAll('.message').forEach(el => {
-                    el.textContent = '';
-                    el.classList.remove('show');
-                });
-            });
+        document.getElementById('login-tab').addEventListener('click', () => {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('register-form').style.display = 'none';
+            document.getElementById('login-tab').classList.add('active');
+            document.getElementById('register-tab').classList.remove('active');
         });
         
-        // Обработчики кнопок
-        document.getElementById('loginBtn').addEventListener('click', login);
-        document.getElementById('registerBtn').addEventListener('click', register);
-        
-        // Функция входа
-        function login() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-            const messageEl = document.getElementById('loginMessage');
-            const btn = document.getElementById('loginBtn');
-            const btnText = btn.querySelector('.btn-text');
-            
-            // Валидация
-            if (!username || !password) {
-                showMessage(messageEl, 'Заполните все поля', 'error');
-                return;
-            }
-            
-            // Показать индикатор загрузки
-            btnText.innerHTML = '<div class="loading"></div> Вход...';
-            btn.disabled = true;
-            
-            // Отправляем на сервер
-            alt.emit('auth:login', username, password);
-        }
-        
-        // Функция регистрации
-        function register() {
-            const username = document.getElementById('registerUsername').value;
-            const email = document.getElementById('registerEmail').value;
-            const password = document.getElementById('registerPassword').value;
-            const confirm = document.getElementById('registerConfirm').value;
-            const messageEl = document.getElementById('registerMessage');
-            const btn = document.getElementById('registerBtn');
-            const btnText = btn.querySelector('.btn-text');
-            
-            // Валидация
-            if (!username || !email || !password || !confirm) {
-                showMessage(messageEl, 'Заполните все поля', 'error');
-                return;
-            }
-            
-            if (password !== confirm) {
-                showMessage(messageEl, 'Пароли не совпадают', 'error');
-                return;
-            }
-            
-            if (password.length < 6) {
-                showMessage(messageEl, 'Пароль слишком короткий (мин. 6 символов)', 'error');
-                return;
-            }
-            
-            // Проверка email
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showMessage(messageEl, 'Некорректный email', 'error');
-                return;
-            }
-            
-            // Показать индикатор загрузки
-            btnText.innerHTML = '<div class="loading"></div> Регистрация...';
-            btn.disabled = true;
-            
-            // Отправляем на сервер
-            alt.emit('auth:register', username, password, email);
-        }
-        
-        // Функция показа сообщений
-        function showMessage(element, text, type = 'info') {
-            element.textContent = text;
-            element.style.color = type === 'error' ? '#ff6b6b' : '#4ecca3';
-            element.classList.add('show');
-            
-            // Автоскрытие сообщений
-            setTimeout(() => {
-                element.classList.remove('show');
-            }, 5000);
-        }
-        
-        // События от сервера
-        alt.on('auth:message', (message, type) => {
-            const activeMessage = document.querySelector('.auth-form.active .message');
-            if (activeMessage) {
-                showMessage(activeMessage, message, type);
-            }
-            
-            // Восстанавливаем кнопки
-            document.querySelectorAll('.submit-btn').forEach(btn => {
-                btn.querySelector('.btn-text').innerHTML = 
-                    btn.id === 'loginBtn' ? 'Войти' : 'Создать аккаунт';
-                btn.disabled = false;
-            });
+        document.getElementById('register-tab').addEventListener('click', () => {
+            document.getElementById('register-form').style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('register-tab').classList.add('active');
+            document.getElementById('login-tab').classList.remove('active');
         });
-        
-        // Успешная авторизация
-        alt.on('auth:success', () => {
-            // Анимация закрытия
-            const container = document.querySelector('.auth-container');
-            container.style.opacity = '0';
-            container.style.transform = 'translateY(-20px)';
-            container.style.pointerEvents = 'none';
-            
-            // Можно добавить дополнительные эффекты
-        });
-        
-        // Создаем частицы при загрузке
-        createParticles();
 
-            // Добавьте эти функции в конец скрипта
-    
-    // Глобальные ссылки на элементы
-    let loginBtn, registerBtn;
-    
-    // Инициализация при загрузке
-    window.addEventListener('DOMContentLoaded', () => {
-        loginBtn = document.getElementById('loginBtn');
-        registerBtn = document.getElementById('registerBtn');
-        
-        // Обработчики для кнопок
-        if (loginBtn) loginBtn.addEventListener('click', handleLogin);
-        if (registerBtn) registerBtn.addEventListener('click', handleRegister);
-        
-        // Обработчики для Enter
-        const loginPass = document.getElementById('loginPassword');
-        const registerConfirm = document.getElementById('registerConfirm');
-        
-        if (loginPass) loginPass.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleLogin();
-        });
-        
-        if (registerConfirm) registerConfirm.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleRegister();
-        });
-    });
-    
-    // Обработка входа
-    function handleLogin() {
-        const username = document.getElementById('loginUsername').value;
-        const password = document.getElementById('loginPassword').value;
-        
-        if (!username || !password) {
-            showMessage('Заполните все поля', 'error');
-            return;
+        async function login() {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const message = document.getElementById('login-message');
+            
+            const response = await fetch('http://localhost:3000/auth/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, password })
+            });
+            
+            const result = await response.json();
+            message.innerText = result.message;
+            
+            if (result.success) {
+                alt.emit('client:authSuccess', result.accountId);
+            }
         }
-        
-        // Показать загрузку
-        if (loginBtn) {
-            loginBtn.querySelector('.btn-text').innerHTML = '<div class="loading"></div> Вход...';
-            loginBtn.disabled = true;
+
+        async function register() {
+            const login = document.getElementById('register-login').value;
+            const email = document.getElementById('register-email').value;
+            const password = document.getElementById('register-password').value;
+            const confirm = document.getElementById('register-confirm').value;
+            const message = document.getElementById('register-message');
+            
+            // Простая валидация
+            if (password !== confirm) {
+                message.innerText = "Пароли не совпадают!";
+                return;
+            }
+            
+            if (login.length < 3) {
+                message.innerText = "Логин слишком короткий (мин 3 символа)";
+                return;
+            }
+            
+            const response = await fetch('http://localhost:3000/auth/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    login, 
+                    email, 
+                    password,
+                    socialClub: alt.getSocialClubName() 
+                })
+            });
+            
+            const result = await response.json();
+            message.innerText = result.message;
+            
+            if (result.success) {
+                document.getElementById('login-tab').click();
+                document.getElementById('login-email').value = email;
+            }
         }
-        
-        // Отправить на сервер
-        alt.emit('auth:login', username, password);
-    }
-    
-    // Обработка регистрации
-    function handleRegister() {
-        const username = document.getElementById('registerUsername').value;
-        const email = document.getElementById('registerEmail').value;
-        const password = document.getElementById('registerPassword').value;
-        const confirm = document.getElementById('registerConfirm').value;
-        
-        // Валидация
-        if (!username || !email || !password || !confirm) {
-            showMessage('Заполните все поля', 'error');
-            return;
-        }
-        
-        if (password !== confirm) {
-            showMessage('Пароли не совпадают', 'error');
-            return;
-        }
-        
-        if (password.length < 6) {
-            showMessage('Пароль слишком короткий (минимум 6 символов)', 'error');
-            return;
-        }
-        
-        // Показать загрузку
-        if (registerBtn) {
-            registerBtn.querySelector('.btn-text').innerHTML = '<div class="loading"></div> Регистрация...';
-            registerBtn.disabled = true;
-        }
-        
-        // Отправить на сервер
-        alt.emit('auth:register', username, password, email);
-    }
-    
-    // Сброс кнопок
-    alt.on('resetButtons', () => {
-        if (loginBtn) {
-            loginBtn.querySelector('.btn-text').innerHTML = 'Войти';
-            loginBtn.disabled = false;
-        }
-        
-        if (registerBtn) {
-            registerBtn.querySelector('.btn-text').innerHTML = 'Создать аккаунт';
-            registerBtn.disabled = false;
-        }
-    });
     </script>
 </body>
 </html>
