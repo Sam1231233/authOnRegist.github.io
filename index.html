@@ -1,137 +1,198 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <title>Gang RP</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gang RP | Авторизация</title>
     <style>
-        body { 
-            font-family: 'Arial', sans-serif; 
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
-            color: white;
-            height: 100vh;
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            color: white;
         }
+        
         .container {
             background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
             width: 350px;
+            padding: 30px;
             text-align: center;
         }
+        
         .logo {
             font-size: 32px;
             margin-bottom: 20px;
             text-shadow: 0 0 10px #ff0000;
         }
+        
         .tabs {
             display: flex;
             margin-bottom: 20px;
+            border-bottom: 2px solid #333;
         }
+        
         .tab {
             flex: 1;
             padding: 10px;
-            background: #222;
             cursor: pointer;
-            border-bottom: 2px solid #444;
+            background: #222;
+            transition: all 0.3s;
         }
+        
         .tab.active {
             background: #b21f1f;
             border-bottom: 2px solid #ff0000;
         }
+        
+        .form-container {
+            padding: 10px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
         input {
             width: 100%;
             padding: 12px;
-            margin: 10px 0;
             border: none;
             border-radius: 5px;
             background: #333;
             color: white;
+            font-size: 16px;
         }
+        
         button {
             width: 100%;
             padding: 12px;
-            margin: 10px 0;
+            background: #b21f1f;
             border: none;
             border-radius: 5px;
-            background: #b21f1f;
             color: white;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: background 0.3s;
         }
+        
         button:hover {
             background: #ff0000;
         }
+        
         .message {
             margin-top: 15px;
-            color: #ff5555;
             min-height: 20px;
+            color: #ff5555;
+            font-size: 14px;
+        }
+        
+        .hidden {
+            display: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="logo">GANG RP</div>
+        
         <div class="tabs">
             <div class="tab active" id="login-tab">Вход</div>
             <div class="tab" id="register-tab">Регистрация</div>
         </div>
         
-        <div id="login-form">
-            <input type="email" id="login-email" placeholder="Email">
-            <input type="password" id="login-password" placeholder="Пароль">
-            <button onclick="login()">Войти</button>
-            <div class="message" id="login-message"></div>
-        </div>
-        
-        <div id="register-form" style="display:none">
-            <input type="text" id="register-login" placeholder="Логин">
-            <input type="email" id="register-email" placeholder="Email">
-            <input type="password" id="register-password" placeholder="Пароль">
-            <input type="password" id="register-confirm" placeholder="Повторите пароль">
-            <button onclick="register()">Зарегистрироваться</button>
-            <div class="message" id="register-message"></div>
+        <div class="form-container">
+            <div id="login-form">
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Пароль" autocomplete="off">
+                </div>
+                <button onclick="login()">Войти</button>
+                <div class="message" id="login-message"></div>
+            </div>
+            
+            <div id="register-form" class="hidden">
+                <div class="form-group">
+                    <input type="text" id="register-login" placeholder="Логин" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <input type="email" id="register-email" placeholder="Email" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-password" placeholder="Пароль" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <input type="password" id="register-confirm" placeholder="Повторите пароль" autocomplete="off">
+                </div>
+                <button onclick="register()">Зарегистрироваться</button>
+                <div class="message" id="register-message"></div>
+            </div>
         </div>
     </div>
 
     <script>
         // Переключение между вкладками
         document.getElementById('login-tab').addEventListener('click', () => {
-            document.getElementById('login-form').style.display = 'block';
-            document.getElementById('register-form').style.display = 'none';
-            document.getElementById('login-tab').classList.add('active');
-            document.getElementById('register-tab').classList.remove('active');
+            setActiveTab('login');
         });
         
         document.getElementById('register-tab').addEventListener('click', () => {
-            document.getElementById('register-form').style.display = 'block';
-            document.getElementById('login-form').style.display = 'none';
-            document.getElementById('register-tab').classList.add('active');
-            document.getElementById('login-tab').classList.remove('active');
+            setActiveTab('register');
         });
-
+        
+        function setActiveTab(tab) {
+            const isLogin = tab === 'login';
+            
+            // Обновление вкладок
+            document.getElementById('login-tab').classList.toggle('active', isLogin);
+            document.getElementById('register-tab').classList.toggle('active', !isLogin);
+            
+            // Обновление форм
+            document.getElementById('login-form').classList.toggle('hidden', !isLogin);
+            document.getElementById('register-form').classList.toggle('hidden', isLogin);
+        }
+        
         async function login() {
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
             const message = document.getElementById('login-message');
             
-            const response = await fetch('http://localhost:3000/auth/login', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, password })
-            });
+            // Проверка заполненности
+            if (!email || !password) {
+                message.innerText = "Заполните все поля!";
+                return;
+            }
             
-            const result = await response.json();
-            message.innerText = result.message;
-            
-            if (result.success) {
-                alt.emit('client:authSuccess', result.accountId);
+            try {
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email, password })
+                });
+                
+                const result = await response.json();
+                message.innerText = result.message;
+                
+                if (result.success) {
+                    alt.emit('client:authSuccess', result.accountId);
+                }
+            } catch (e) {
+                message.innerText = "Ошибка соединения с сервером";
             }
         }
-
+        
         async function register() {
             const login = document.getElementById('register-login').value;
             const email = document.getElementById('register-email').value;
@@ -139,36 +200,50 @@
             const confirm = document.getElementById('register-confirm').value;
             const message = document.getElementById('register-message');
             
-            // Простая валидация
+            // Валидация
+            if (!login || !email || !password || !confirm) {
+                message.innerText = "Заполните все поля!";
+                return;
+            }
+            
             if (password !== confirm) {
                 message.innerText = "Пароли не совпадают!";
                 return;
             }
             
             if (login.length < 3) {
-                message.innerText = "Логин слишком короткий (мин 3 символа)";
+                message.innerText = "Логин должен содержать минимум 3 символа";
                 return;
             }
             
-            const response = await fetch('http://localhost:3000/auth/register', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ 
-                    login, 
-                    email, 
-                    password,
-                    socialClub: alt.getSocialClubName() 
-                })
-            });
-            
-            const result = await response.json();
-            message.innerText = result.message;
-            
-            if (result.success) {
-                document.getElementById('login-tab').click();
-                document.getElementById('login-email').value = email;
+            try {
+                const response = await fetch('http://localhost:3000/auth/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        login, 
+                        email, 
+                        password,
+                        socialClub: alt.getSocialClubName() 
+                    })
+                });
+                
+                const result = await response.json();
+                message.innerText = result.message;
+                
+                if (result.success) {
+                    // Переключаем на вкладку входа
+                    setActiveTab('login');
+                    document.getElementById('login-email').value = email;
+                    document.getElementById('login-password').value = password;
+                }
+            } catch (e) {
+                message.innerText = "Ошибка соединения с сервером";
             }
         }
+        
+        // Инициализация
+        setActiveTab('login');
     </script>
 </body>
 </html>
