@@ -143,6 +143,15 @@
     </div>
 
     <script>
+        window.altAuthSuccess = function(accountId) {
+        alt.emit('authSuccess', accountId);
+        };
+    
+        // Функция для закрытия формы
+        window.closeAuthForm = function() {
+            alt.emit('closeAuth');
+        };
+        
         // Переключение между вкладками
         document.getElementById('login-tab').addEventListener('click', () => {
             setActiveTab('login');
